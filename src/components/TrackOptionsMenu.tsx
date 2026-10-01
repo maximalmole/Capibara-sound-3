@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MoreVertical, Share2, MessageCircle, Copy, Trash2, Check, Download, AlertTriangle, FolderPlus, ChevronLeft, Plus } from 'lucide-react';
+import { MoreVertical, Share2, MessageCircle, Copy, Trash2, Check, AlertTriangle, FolderPlus, ChevronLeft, Plus } from 'lucide-react';
 import { Track, Playlist } from '../types';
-import { getOfflineAudioUrl } from '../services/storage';
 
 interface TrackOptionsMenuProps {
   track: Track;
@@ -83,49 +82,6 @@ export const TrackOptionsMenu: React.FC<TrackOptionsMenuProps> = ({
     } catch (err) {
       console.error('Failed to copy', err);
     }
-  };
-
-  const handleDownloadToDevice = async (e: React.MouseEvent) => {
-    e.stopPropagation();
-    try {
-      let fileUrl = '';
-      
-      // 1. Check if we have it in memory cache (if it's a local reference)
-      const { audioEngine } = await import('../services/audioEngine');
-      const cachedFile = audioEngine.localFilesCache.get(track.id);
-      
-      if (cachedFile) {
-        fileUrl = URL.createObjectURL(cachedFile);
-      } else {
-        // 2. Otherwise check if it's stored in IndexedDB
-        const offlineUrl = await getOfflineAudioUrl(track.id);
-        if (offlineUrl) {
-          fileUrl = offlineUrl;
-        } else if (track.sourceUrl && track.sourceType === 'direct') {
-          // 3. Otherwise download from source URL
-          const res = await fetch(track.sourceUrl);
-          const blob = await res.blob();
-          fileUrl = URL.createObjectURL(blob);
-        }
-      }
-
-      if (fileUrl) {
-        const link = document.createElement('a');
-        link.href = fileUrl;
-        // Clean filename for safety across operating systems
-        const cleanName = track.title.replace(/[\/\\:*?"<>|]/g, '').trim() || 'cancion';
-        link.download = `${cleanName}.mp3`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } else {
-        alert('Esta canción aún no está descargada en el modo offline de la app para poder exportarse.');
-      }
-    } catch (err) {
-      console.warn('Direct physical download failed:', err);
-      alert('Esta canción se reproduce desde una fuente externa segura, para guardarla primero descárgala al modo offline de la app.');
-    }
-    setIsOpen(false);
   };
 
   const handleConfirmDeleteTrack = (e: React.MouseEvent) => {
@@ -300,33 +256,6 @@ export const TrackOptionsMenu: React.FC<TrackOptionsMenuProps> = ({
               )}
               <span className="font-medium">{copied ? '¡Enlace Copiado!' : 'Copiar Enlace'}</span>
             </button>
-
-            {/* Download Option */}
-            {onDownloadTrack && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (!track.isDownloaded) {
-                    onDownloadTrack(track);
-                  }
-                  setIsOpen(false);
-                }}
-                className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-left transition-colors ${
-                  track.isDownloaded
-                    ? 'bg-emerald-950/40 text-emerald-300 font-semibold cursor-default'
-                    : 'hover:bg-neutral-800 text-neutral-200'
-                }`}
-              >
-                {track.isDownloaded ? (
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0" />
-                ) : (
-                  <Download className="w-4 h-4 text-orange-400 shrink-0" />
-                )}
-                <span className="font-medium">
-                  {track.isDownloaded ? '✓ Ya está descargada' : 'Descargar para Modo Offline'}
-                </span>
-              </button>
-            )}
 
             <div className="my-1 border-t border-neutral-800" />
 

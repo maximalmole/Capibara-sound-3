@@ -276,29 +276,6 @@ export const PlaylistView: React.FC<PlaylistViewProps> = ({
             )}
           </button>
 
-          {/* Download all button */}
-          <button
-            onClick={handleDownloadAllClick}
-            disabled={downloadingAll || tracks.length === 0}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-full border text-xs font-semibold transition-all ${
-              downloadedCount === tracks.length && tracks.length > 0
-                ? 'border-orange-500/40 text-orange-400 bg-orange-500/10'
-                : 'border-neutral-700 text-neutral-300 hover:text-white hover:border-neutral-500'
-            }`}
-            title="Descargar todas las pistas para escuchar sin conexión"
-          >
-            {downloadedCount === tracks.length && tracks.length > 0 ? (
-              <Check className="w-4 h-4 text-[#c8824b]" />
-            ) : (
-              <Download className="w-4 h-4" />
-            )}
-            <span className="hidden sm:inline">
-              {downloadedCount === tracks.length && tracks.length > 0
-                ? 'Descargada Completa'
-                : 'Descargar para Modo Offline'}
-            </span>
-          </button>
-
           {/* Add Track Button */}
           <button
             onClick={onOpenAddTrack}

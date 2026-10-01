@@ -415,6 +415,14 @@ export default function App() {
   };
 
   const handleSelectEqPreset = (presetName: EQPresetName) => {
+    if (presetName === 'Personalizado') {
+      audioEngine.setEqGains(playback.eqGains);
+      setPlayback((prev) => ({
+        ...prev,
+        eqPreset: 'Personalizado'
+      }));
+      return;
+    }
     const presetObj = EQ_PRESETS.find((p) => p.name === presetName);
     const gains = presetObj ? presetObj.gains : [0, 0, 0, 0, 0];
     audioEngine.setEqGains(gains);

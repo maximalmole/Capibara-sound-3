@@ -10,6 +10,11 @@ export const EQ_BANDS = [
 
 export const EQ_PRESETS: EQPreset[] = [
   {
+    name: 'Personalizado',
+    label: 'Manual / Ajuste Libre 🎛️',
+    gains: [0, 0, 0, 0, 0]
+  },
+  {
     name: 'Plano',
     label: 'Plano (Normal)',
     gains: [0, 0, 0, 0, 0]

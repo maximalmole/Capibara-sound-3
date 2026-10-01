@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Search, Library, Download } from 'lucide-react';
+import { Home, Search, Library, HardDrive } from 'lucide-react';
 import { ViewTab } from '../types';
 
 interface BottomNavProps {
@@ -17,7 +17,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
     { id: 'home' as ViewTab, label: 'Inicio', icon: Home },
     { id: 'search' as ViewTab, label: 'Buscar', icon: Search },
     { id: 'library' as ViewTab, label: 'Biblioteca', icon: Library },
-    { id: 'offline' as ViewTab, label: 'Descargas', icon: Download }
+    { id: 'offline' as ViewTab, label: 'Dispositivo', icon: HardDrive }
   ];
 
   return (

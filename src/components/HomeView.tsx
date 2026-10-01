@@ -168,7 +168,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               Pistas destacadas en Modo Solo Audio
             </h2>
             <p className="text-xs text-neutral-400">
-              Listas para reproducir en segundo plano y descargar offline
+              Listas para reproducir en segundo plano con pantalla apagada
             </p>
           </div>
         </div>
@@ -201,8 +201,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     )}
                   </div>
                   {track.isDownloaded && (
-                    <span className="absolute top-2 left-2 px-1.5 py-0.5 rounded bg-orange-500/90 text-black text-[9px] font-black">
-                      OFFLINE
+                    <span className="absolute top-2 left-2 px-1.5 py-0.5 rounded bg-emerald-600/90 text-white text-[9px] font-black">
+                      LOCAL
                     </span>
                   )}
                 </div>

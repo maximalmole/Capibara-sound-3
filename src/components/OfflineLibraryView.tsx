@@ -112,12 +112,12 @@ export const OfflineLibraryView: React.FC<OfflineLibraryViewProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className="w-14 h-14 rounded-2xl bg-orange-500/20 text-[#c8824b] flex items-center justify-center shrink-0">
-              <Download className="w-7 h-7" />
+              <HardDrive className="w-7 h-7" />
             </div>
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">
-                  Contenido Descargado (Modo Offline)
+                  Música de tu Dispositivo
                 </h1>
                 <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 ${
                   isOnline 
@@ -129,7 +129,7 @@ export const OfflineLibraryView: React.FC<OfflineLibraryViewProps> = ({
                 </span>
               </div>
               <p className="text-xs text-neutral-400">
-                Audio almacenado de forma nativa en tu dispositivo. Se reproduce al instante con consumo cero de red móvil.
+                Archivos de audio de tu teléfono o computadora. Se reproducen localmente con consumo cero de datos móviles.
               </p>
             </div>
           </div>
@@ -254,10 +254,10 @@ export const OfflineLibraryView: React.FC<OfflineLibraryViewProps> = ({
 
         {downloadedTracks.length === 0 ? (
           <div className="p-12 text-center rounded-2xl bg-neutral-900/40 border border-neutral-800">
-            <Download className="w-12 h-12 text-neutral-600 mx-auto mb-3" />
-            <h3 className="text-sm font-bold text-white mb-1">Aún no tienes canciones</h3>
+            <HardDrive className="w-12 h-12 text-neutral-600 mx-auto mb-3" />
+            <h3 className="text-sm font-bold text-white mb-1">Aún no has sincronizado canciones</h3>
             <p className="text-xs text-neutral-400 max-w-sm mx-auto mb-4">
-              Usa los botones de arriba para vincular una carpeta de música local, o descarga canciones desde el buscador de YouTube presionando <Download className="w-3.5 h-3.5 inline text-orange-400" />.
+              Usa el botón de arriba <strong>"Sincronizar Canciones"</strong> para agregar tus canciones locales, audios de WhatsApp o archivos MP3 guardados en tu dispositivo.
             </p>
           </div>
         ) : (

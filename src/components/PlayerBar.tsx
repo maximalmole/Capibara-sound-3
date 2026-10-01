@@ -244,8 +244,8 @@ export const PlayerBar: React.FC<PlayerBarProps> = ({
             </div>
             {track.isDownloaded && (
               <span 
-                className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-orange-500 rounded-full flex items-center justify-center text-[8px] text-black font-bold"
-                title="Disponible sin conexión (Offline)"
+                className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-500 rounded-full flex items-center justify-center text-[8px] text-black font-bold"
+                title="Audio local de tu dispositivo"
               >
                 ✓
               </span>

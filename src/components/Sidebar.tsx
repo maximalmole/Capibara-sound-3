@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Search, Library, Download, Plus } from 'lucide-react';
+import { Home, Search, Library, HardDrive, Plus } from 'lucide-react';
 import { ViewTab, Playlist } from '../types';
 
 interface SidebarProps {
@@ -55,10 +55,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
               : 'text-neutral-400 hover:text-white'
           }`}
         >
-          <Download className="w-5 h-5 text-orange-400" />
+          <HardDrive className="w-5 h-5 text-orange-400" />
           <div className="flex items-center justify-between w-full">
-            <span>Modo Offline</span>
-            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-orange-500/20 text-orange-400">Sin datos</span>
+            <span>Tu Dispositivo</span>
+            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-orange-500/20 text-orange-400">Local</span>
           </div>
         </button>
       </div>

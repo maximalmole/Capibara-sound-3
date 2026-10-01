@@ -7,7 +7,6 @@ import {
   SkipForward, 
   Repeat, 
   Heart, 
-  Download, 
   Check, 
   Clock, 
   Gauge, 
@@ -359,25 +358,6 @@ export const FullPlayerModal: React.FC<FullPlayerModalProps> = ({
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
-
-
-            {/* Download for offline */}
-            <button
-              onClick={() => onDownloadTrack(track)}
-              className={`p-2.5 rounded-full border transition-all ${
-                track.isDownloaded
-                  ? 'border-orange-500 bg-orange-500/10 text-orange-400'
-                  : 'border-neutral-700 text-neutral-400 hover:text-white hover:border-neutral-500'
-              }`}
-              title={track.isDownloaded ? 'Descargado para modo offline' : 'Descargar para reproducir sin conexión'}
-            >
-              {track.isDownloaded ? (
-                <Check className="w-5 h-5 text-[#c8824b]" />
-              ) : (
-                <Download className="w-5 h-5" />
-              )}
-            </button>
-
             {/* Favorite button */}
             <button
               onClick={() => onToggleFavorite(track.id)}
