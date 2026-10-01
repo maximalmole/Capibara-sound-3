@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Rounded modern app icon container -->
+  <rect width="512" height="512" rx="128" fill="#14110f"/>
+  <circle cx="256" cy="256" r="216" fill="#1c1613" stroke="#c8824b" stroke-width="8"/>
+  <circle cx="256" cy="256" r="198" fill="#241c17" stroke="#8C5C38" stroke-width="2" opacity="0.5"/>
+
+  <!-- Warm ambient background glow -->
+  <radialGradient id="capyGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#c8824b" stop-opacity="0.35"/>
+    <stop offset="100%" stop-color="#14110f" stop-opacity="0"/>
+  </radialGradient>
+  <circle cx="256" cy="256" r="175" fill="url(#capyGlow)"/>
+
+  <!-- Ground Shadow -->
+  <ellipse cx="250" cy="405" rx="160" ry="22" fill="#0a0807" opacity="0.85"/>
+
+  <!-- CAPYBARA SITTING PROFILE (Boxy, Stocky, Unmistakable Capybara anatomy) -->
+  <g transform="translate(10, 5)">
+    <!-- Heavy Body & Stocky Neck (Boxy & Heavy Barrel Sitting Shape) -->
+    <!-- Back rump, thick back, short neck, heavy chest, flat bottom -->
+    <path d="
+      M 110,390
+      C 80,380 65,335 70,280
+      C 75,225 105,195 150,185
+      C 175,180 195,170 215,150
+      L 230,125
+      C 235,115 255,108 310,110
+      C 355,112 385,125 390,150
+      C 395,175 385,210 375,225
+      C 350,250 320,240 295,255
+      C 275,270 270,300 275,390
+      L 235,390
+      C 230,340 225,310 205,300
+      C 185,290 170,310 160,335
+      L 155,390
+      Z
+    " fill="#7a4b27"/>
+
+    <!-- Main Body Layer with Rich Warm Capybara Fur Color -->
+    <path d="
+      M 118,385
+      C 90,375 78,335 82,285
+      C 88,235 115,202 155,192
+      C 180,187 200,175 220,155
+      L 235,130
+      C 242,120 262,112 312,115
+      C 352,117 378,128 382,150
+      C 386,170 376,202 365,218
+      C 342,242 312,232 290,248
+      C 272,260 266,292 270,385
+      Z
+    " fill="#8C5C38"/>
+
+    <!-- Characteristic Boxy Capybara Snout / Head Top Flattening -->
+    <!-- Capybaras have a very flat top of head and squared-off, boxy snout -->
+    <path d="
+      M 225,145
+      L 240,122
+      C 250,115 270,112 315,115
+      C 360,118 382,128 385,152
+      C 388,172 378,202 365,215
+      C 340,235 305,228 280,232
+      C 250,235 230,205 225,175
+      Z
+    " fill="#9c663e"/>
+
+    <!-- Distinctive Small Rounded Ear (At top back of head) -->
+    <path d="M 242,125 C 235,112 250,102 262,112 C 267,117 264,127 254,130 Z" fill="#523118"/>
+    <path d="M 246,122 C 242,114 251,108 257,113 Z" fill="#361f0e"/>
+
+    <!-- Large Squared Capybara Nose at Front Corner of Snout -->
+    <path d="M 378,150 C 388,155 388,175 378,185 C 370,192 362,185 365,170 Z" fill="#1f130b"/>
+
+    <!-- Relaxed Closed Eye (Low and Horizontal on Flat Head) -->
+    <path d="M 295,142 Q 310,135 325,142" stroke="#1f130b" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Heavy Folded Hind Leg (Sitting Position) -->
+    <path d="M 92,340 C 90,280 150,260 180,310 C 190,335 185,370 150,385 C 115,385 95,365 92,340 Z" fill="#663c1d"/>
+    <!-- Front Paw -->
+    <path d="M 245,355 L 272,355 C 280,355 282,370 282,385 L 245,385 Z" fill="#5a3419"/>
+    <!-- Back Paw -->
+    <path d="M 105,365 L 155,365 C 162,365 165,375 165,385 L 105,385 Z" fill="#5a3419"/>
+
+    <!-- DJ Headphones with Orange Leather Accents -->
+    <!-- Headband arc -->
+    <path d="M 252,108 C 248,60 315,55 320,108" stroke="#f09858" stroke-width="14" stroke-linecap="round"/>
+    <!-- Ear Cushion over the Capybara ear -->
+    <rect x="238" y="105" width="26" height="48" rx="12" fill="#f09858"/>
+    <rect x="243" y="113" width="14" height="32" rx="6" fill="#1a120c"/>
+  </g>
+
+  <!-- Sound Waves / Chill Vibe Audio Signals -->
+  <g stroke="#f09858" stroke-linecap="round">
+    <path d="M 420,165 Q 438,185 420,205" stroke-width="5"/>
+    <path d="M 440,150 Q 465,185 440,220" stroke-width="5" opacity="0.6"/>
+    <path d="M 460,135 Q 490,185 460,235" stroke-width="5" opacity="0.3"/>
+  </g>
+</svg>

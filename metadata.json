@@ -1,0 +1,6 @@
+{
+  "name": "CAPIBARA SOUND",
+  "description": "CAPIBARA SOUND: Reproduce solo el audio de enlaces de video en segundo plano, ahorra batería y datos móviles, crea listas tipo Spotify, descarga para modo offline e importa listas de Spotify automáticamente.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
