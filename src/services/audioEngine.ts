@@ -65,20 +65,15 @@ class AudioEngine {
   private setupBackgroundKeepAlive() {
     if (typeof window === 'undefined') return;
     try {
-      // 1-second silent WAV loop to hold active background audio session on mobile operating systems
-      this.silentAudioElement = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=');
-      this.silentAudioElement.loop = true;
-      this.silentAudioElement.volume = 0.0001;
-
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
-          // When app goes to background on mobile phone, ensure audio session stays active
+          // When app goes to background on mobile phone, request wake lock
           this.requestWakeLock();
           if (this.isYouTube && this.ytPlayer && typeof this.ytPlayer.playVideo === 'function') {
             try {
               const state = typeof this.ytPlayer.getPlayerState === 'function' ? this.ytPlayer.getPlayerState() : -1;
-              if (state === 1 || state === 3) { // PLAYING or BUFFERING
-                this.silentAudioElement?.play().catch(() => {});
+              if (state === 1 || state === 3) {
+                // Ensure video attempts to continue playing
                 this.ytPlayer.playVideo();
               }
             } catch (e) {
@@ -86,13 +81,14 @@ class AudioEngine {
             }
           }
         } else {
+          // When returning to app
           if (this.audioContext && this.audioContext.state === 'suspended') {
             this.audioContext.resume().catch(() => {});
           }
         }
       });
     } catch (e) {
-      console.warn('Silent audio keep-alive setup error:', e);
+      console.warn('Background keep-alive setup error:', e);
     }
   }
 
@@ -183,10 +179,20 @@ class AudioEngine {
 
   private setupAudioListeners() {
     this.audioElement.addEventListener('play', () => {
-      if (!this.isYouTube) this.emit('play');
+      if (!this.isYouTube) {
+        if ('mediaSession' in navigator) {
+          navigator.mediaSession.playbackState = 'playing';
+        }
+        this.emit('play');
+      }
     });
     this.audioElement.addEventListener('pause', () => {
-      if (!this.isYouTube) this.emit('pause');
+      if (!this.isYouTube) {
+        if ('mediaSession' in navigator) {
+          navigator.mediaSession.playbackState = 'paused';
+        }
+        this.emit('pause');
+      }
     });
     this.audioElement.addEventListener('timeupdate', () => {
       if (!this.isYouTube) {
@@ -261,9 +267,11 @@ class AudioEngine {
       container.style.right = '0px';
       container.style.width = '240px';
       container.style.height = '180px';
-      container.style.opacity = '0.001';
+      container.style.opacity = '0.05';
       container.style.pointerEvents = 'none';
-      container.style.zIndex = '-999';
+      container.style.zIndex = '0';
+      container.style.transform = 'scale(0.05)';
+      container.style.transformOrigin = 'bottom right';
       document.body.appendChild(container);
     }
 
@@ -323,14 +331,23 @@ class AudioEngine {
 
     switch (event.data) {
       case PlayerState.PLAYING:
+        if ('mediaSession' in navigator) {
+          navigator.mediaSession.playbackState = 'playing';
+        }
         this.emit('play');
         this.startYTProgressPolling();
         break;
       case PlayerState.PAUSED:
+        if ('mediaSession' in navigator) {
+          navigator.mediaSession.playbackState = 'paused';
+        }
         this.emit('pause');
         this.stopYTProgressPolling();
         break;
       case PlayerState.ENDED:
+        if ('mediaSession' in navigator) {
+          navigator.mediaSession.playbackState = 'none';
+        }
         if (this.crossfadeTriggeredForTrackId !== this.currentTrack?.id) {
           if (this.currentTrack) {
             this.crossfadeTriggeredForTrackId = this.currentTrack.id;
@@ -690,8 +707,12 @@ class AudioEngine {
     if (typeof window === 'undefined' || !('mediaSession' in navigator)) return;
 
     try {
-      navigator.mediaSession.setActionHandler('play', () => this.play());
-      navigator.mediaSession.setActionHandler('pause', () => this.pause());
+      navigator.mediaSession.setActionHandler('play', async () => {
+        await this.play();
+      });
+      navigator.mediaSession.setActionHandler('pause', () => {
+        this.pause();
+      });
       navigator.mediaSession.setActionHandler('seekto', (details) => {
         if (details.seekTime !== undefined) {
           this.seek(details.seekTime);
